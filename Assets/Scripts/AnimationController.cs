@@ -9,6 +9,7 @@ public class AnimationController : MonoBehaviour
     public Animator[] cardAnimators;
     public Material[] frontMaterials;
     public Sprite[] menus;
+    public VideoClip[] videoClips;
 
     public GameObject confetti;
  
@@ -66,18 +67,24 @@ public class AnimationController : MonoBehaviour
         confetti.GetComponent<ParticleSystem>().Play();
 
 
-        if (index==3)
+
+        
+
+        if (index >= 0 && index <=5)
         {
-            videoPlayer.gameObject.SetActive(true);
+            videoPlayer.SetActive(true);
+            var vp = videoPlayer.GetComponent<VideoPlayer>();
+            vp.clip = videoClips[index];
+            vp.Play();
+
         }
-        else if (index==4)
+        else if (index==6)
         {
             hologram.gameObject.SetActive(true);
         }
         else
         {
             buyButton.SetActive(true);
-            buyButton.GetComponent<Image>().sprite = menus[index];
         }
        
     }
