@@ -9,6 +9,8 @@ public class AnimationController : MonoBehaviour
     public Animator[] cardAnimators;
     public Material[] frontMaterials;
     public Sprite[] menus;
+    public string[] cardUrls;
+
     public VideoClip[] videoClips;
 
     public GameObject confetti;
@@ -54,6 +56,7 @@ public class AnimationController : MonoBehaviour
         {
             animator.gameObject.GetComponent<AnimationEvents>().RestoreFront();
             animator.SetTrigger("clicked");
+            RandomCardGenerator.instance.AssignRandomCard();
         }
     }
 
@@ -82,11 +85,19 @@ public class AnimationController : MonoBehaviour
         {
             hologram.gameObject.SetActive(true);
         }
-        else
+        else if(index == 8)
         {
             buyButton.SetActive(true);
+            buyButton.GetComponent<Image>().sprite = menus[0];
+            cardURL = cardUrls[0];
         }
-       
+        else if (index == 9)
+        {
+            buyButton.SetActive(true);
+            buyButton.GetComponent<Image>().sprite = menus[1];
+            cardURL = cardUrls[1];
+        }
+
     }
 
     
@@ -95,6 +106,13 @@ public class AnimationController : MonoBehaviour
     {
         Application.OpenURL(url);
     }
+
+    public string cardURL;
+    public void OpenCardURL()
+    {
+        Application.OpenURL(cardURL);
+    }
+
 
     public void Reset()
     {
